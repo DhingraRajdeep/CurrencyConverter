@@ -14,15 +14,16 @@
 
 @property (nonatomic) CRCurrencyRequest *req;
 @property (weak, nonatomic) IBOutlet UITextField *inputField;
-@property (weak, nonatomic) IBOutlet UILabel *toUSD;
+
 @property (weak, nonatomic) IBOutlet UILabel *toEURO;
 @property (weak, nonatomic) IBOutlet UILabel *toJPY;
 @property (weak, nonatomic) IBOutlet UIButton *convertButton;
 
+@property (weak, nonatomic) IBOutlet UILabel *toINR;
+
 @end
 
 @implementation ViewController
-t
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -39,7 +40,16 @@ t
 - (void)currencyRequest:(CRCurrencyRequest *)req
     retrievedCurrencies:(CRCurrencyResults *)currencies{
     self.convertButton.enabled=YES;
-    self.toUSD.text = @"Success";
+    double val = [self.inputField.text floatValue];
+    double val1 = val*currencies.INR;
+    double val2 = val*currencies.EUR;
+    double val3 = val*currencies.JPY;
+    NSString *temp1 = [NSString stringWithFormat:@"%.2f",val1];
+    NSString *temp2 = [NSString stringWithFormat:@"%.2f",val2];
+    NSString *temp3 = [NSString stringWithFormat:@"%.2f",val3];
+    self.toINR.text = temp1;
+    self.toJPY.text = temp3;
+    self.toEURO.text = temp2;
 }
 
 @end
